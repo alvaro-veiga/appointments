@@ -1,0 +1,29 @@
+service: agenda-service
+
+frameworkVersion: '4'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+
+functions:
+  getAgendas:
+    handler: src/agenda/controller/agendaController.getAgendas
+    events:
+      - http:
+          path: agendas
+          method: get
+  marcarAgendamento:
+    handler: src/agendamento/controller/agendamentoController.marcarAgendamento
+    events:
+      - http:
+          path: agendamento
+          method: post
+
+custom:
+  serverless-offline:
+    port: 3000
